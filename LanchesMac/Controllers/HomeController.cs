@@ -15,14 +15,14 @@ namespace LanchesMac.Controllers
 
         public IActionResult Index()
         {
-            TempData["Usuario"] = "Igor";
+            HttpContext.Session.SetString("Usuario", "Igor");
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
+        } 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
