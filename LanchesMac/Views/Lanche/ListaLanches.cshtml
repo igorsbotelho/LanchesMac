@@ -1,31 +1,15 @@
-﻿@model IEnumerable<LanchesMac.Models.Lanche>
-
+﻿@model LanchesViewModel
 
 <div>
-    <h2>
-        Todos os Lanches
-    </h2>
-    <h1>
-        Olá, @Context.Session.GetString("Usuario")!
-    </h1>
+    <h2>@Model.CategoriaAtual</h2>
 </div>
 
-@foreach (var lanche in Model)
-{
-    <div>
-        <h4>
-            @lanche.Nome
-        </h4>
-        <p><img src="@lanche.ImagemUrl" width="100" height="100" />;
-        </p>
-        <h4>
-            @lanche.Preco.ToString("C")
-        </h4>
-    </div>
-}
 
-<div>
-    <h2>
-        @ViewBag.Total @ViewBag.TotalCount
-    </h2>
+<div class="container">
+    <div class="row">
+        @foreach (var lanche in Model.Lanches)
+        {
+            <partial name="_LanchesResumo" for="@lanche" />
+        }
+    </div>
 </div>
