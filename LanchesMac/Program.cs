@@ -11,6 +11,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<ILancheRepository, LancheRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+// Using Session
+builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 
 var app = builder.Build();
@@ -28,7 +31,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

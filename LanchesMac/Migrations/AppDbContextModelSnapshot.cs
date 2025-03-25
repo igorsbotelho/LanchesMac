@@ -21,6 +21,31 @@ namespace LanchesMac.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("LanchesMac.Models.CarrinhoCompraItem", b =>
+                {
+                    b.Property<int>("CarrinhoCompraItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarrinhoCompraItemId"));
+
+                    b.Property<string>("CarrinnhoCompraId")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("LancheId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarrinhoCompraItemId");
+
+                    b.HasIndex("LancheId");
+
+                    b.ToTable("CarrinhoCompraItens");
+                });
+
             modelBuilder.Entity("LanchesMac.Models.Categoria", b =>
                 {
                     b.Property<int>("CategoriaId")
@@ -90,6 +115,15 @@ namespace LanchesMac.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Lanches");
+                });
+
+            modelBuilder.Entity("LanchesMac.Models.CarrinhoCompraItem", b =>
+                {
+                    b.HasOne("LanchesMac.Models.Lanche", "Lanche")
+                        .WithMany()
+                        .HasForeignKey("LancheId");
+
+                    b.Navigation("Lanche");
                 });
 
             modelBuilder.Entity("LanchesMac.Models.Lanche", b =>
